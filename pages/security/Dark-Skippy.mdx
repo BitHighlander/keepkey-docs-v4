@@ -1,0 +1,95 @@
+---
+title: "Dark Skippy: Understanding the Ramifications"
+date: "Sep 4"
+author: "@KeepKeyDevs"
+---
+
+## Dark Skippy: Understanding the Ramifications
+
+### What is it? Is no one safe? Is everyone safe?
+
+The world of hardware signing device security was recently shaken by the announcement of the **Dark Skippy** method, a new technique for a signing device to leak secrets. While it’s been known for years that a malicious signing device could potentially exfiltrate secret data from a secure, offline device via the signatures it produces, Dark Skippy improves on the state of the art in significant new ways.
+
+---
+
+### What is Dark Skippy?
+
+Dark Skippy is a new attack method that:
+
+- Enables the attacker to extract secret data in just a few signatures, rather than approximately 64.
+- Allows the extraction of any secret data, not only the specific secret key being used in signing.
+- Could potentially hide in closed-source firmware or enclaves without detection.
+
+However, it’s crucial to note:
+
+> “Dark Skippy requires a signer to be corrupted via malicious firmware. Dark Skippy has not yet been seen in the wild.”
+
+---
+
+### Threat Modeling
+
+Before sounding the alarm, we need to consider the actual threat model:
+
+- The attacker must have their code running on a user’s signing device, in the portion with access to secret keys.
+- Most reputable signing device manufacturers (except SeedSigner) require signed firmware images.
+- An attacker would need to either compromise the device’s signature verification or modify the hardware to install the attack code.
+- This is not a remote attack — it requires physical interception and reprogramming or modification of devices.
+
+---
+
+### Security Measures
+
+Hardware signing device manufacturers employ various techniques to protect against supply chain compromises, such as:
+
+- Tamper-evident packaging
+- Serialized chips that can be cryptographically verified with the vendor
+- Epoxy potting or ultrasonic welding
+- Cross-component verification
+
+---
+
+### Are You Safe?
+
+If your device is any of the following:
+
+- KeepKey
+- ColCard
+- Trezor Safe 3/5
+- BitBox02
+- Keystone Pro 3
+- BitKey
+
+And it arrived directly from the manufacturer (or a trusted reseller), you’re likely safe.
+
+However, some commonly used devices are more vulnerable because users cannot verify their firmware:
+
+- Ledger (all devices, closed-source)
+- NGRAVE (closed-source)
+- Ellipal (closed-source)
+- SeedSigner (unsigned)
+
+---
+
+### Implications
+
+Dark Skippy highlights the level of trust users place in hardware wallet manufacturers. Even if you’re using devices correctly and injecting your own dice-rolled seed, closed-source hardware wallets could potentially extract private keys with just the signatures — without anyone knowing.
+
+---
+
+### Recommendations
+
+> “At KeepKey, we always recommend multi-vendor multi-sig between trusted hardware wallets.”
+
+Long-term users must be relentless in the use of hardware over software. Software wallets can have very malicious private key leaking by single lines of code snuck into packages or even running in background processes of cellphones or computers. No longer does malware need to communicate with command and control; it can simply leak via the signatures itself.
+
+Hardware wallet users need to verify the firmware they are running on devices themselves. It is no longer “safer” to allow even small pieces of hardware wallets to remain closed-source because of the ease with which private keys can leave the device via signatures.
+
+Users holding legacy amounts of #bitcoin should not trust a single vendor (yes, this is coming from a hardware manufacturer ourselves) and instead use industry-proven multi-vendor, multi-sig.
+
+**Guide**: [KeepKeyDevs Guide](https://x.com/KeepKeyDevs/status/1829927461007536284)
+
+---
+
+### Conclusion
+
+With the disclosure of Dark Skippy, users need to be more aware of the trust levels involved with closed-source hardware and the potential risks to their life savings. This development underscores the importance of vigilance and the need for open-source solutions in the hardware wallet space. While this is true, the day-to-day risk of hardware wallets from outside attacks doesn’t change much because things like Dark Skippy have already been known, and hardware wallets already protect from supply chain attacks.

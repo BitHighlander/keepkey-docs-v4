@@ -1,0 +1,66 @@
+# What are Accounts and Addresses, and How to Manage Them?
+
+## Let’s Begin
+
+Don’t have KeepKey Desktop? [Get it here](https://keepkey.com/get-started).
+
+To manage your funds, you must use a dApp. There are many dApps in the ecosystem, but for sending Bitcoin, the best option is ShapeShift. That’s why we default to the ShapeShift dApp opening every time the application starts.
+
+*(If for any reason you are not brought into ShapeShift on startup, [click here](#).)*
+
+## Managing Your Bitcoin
+
+1. **Search for Bitcoin (BTC).**
+2. **Press the Receive Button.**
+3. **To receive Bitcoin, give this address to the person or exchange you are receiving Bitcoin from.**
+
+You can verify your Bitcoin transactions here:
+[Blockstream Block Explorer](https://blockstream.info)
+_Blockstream Explorer is an open-source block explorer providing detailed blockchain data across Bitcoin, Testnet, and more._
+
+You can also view your transaction history in the app.
+
+### Understanding Address Script Types
+
+- **Legacy Addresses:**
+Legacy addresses are traditional Bitcoin addresses that begin with the number "1". They are supported by most wallets and exchanges and are the most commonly used address type.
+
+- **SegWit P2SH:**
+These addresses are a type of SegWit address that start with the number "3" and are supported by most wallets and exchanges. They provide a more secure and efficient way to send Bitcoin.
+
+- **Native SegWit:**
+Native SegWit addresses start with "bc1" and are supported by most wallets and exchanges. These are the most secure and efficient addresses to use, with lower fees compared to other address types.
+
+### TL;DR
+
+There are no wrong answers—no selection will result in a loss of funds. SegWit addresses are slightly cheaper in transaction fees, but the fee savings from using native SegWit don’t justify moving your funds unless you’re receiving new Bitcoin into your wallet.
+
+## Understanding Accounts
+
+An account is a very loaded term. In our application, accounts refer to specific paths in relation to BIP39 derivation paths. Accounts can be used to segregate funds purely for accounting purposes. Each account can produce an infinite number of legacy, SegWit P2SH, and native SegWit addresses.
+
+### Limiting Account Generation:
+
+In order to maximize the performance of the application, we default to a single account. If you wish to segregate funds for account purposes, follow these steps:
+
+1. Go to the Accounts tab.
+2. Verify if you have used `account0`. If you have not and do not currently hold any Bitcoin, you **must** first fund your `account0` with *any* amount of Bitcoin.
+3. Press **Add Account**, select **Bitcoin**, and continue.
+
+Both accounts will contain all three script types. You may distribute funds to any of these paths, and each path can generate an infinite number of addresses. All accounts tracked by the app will register as source Bitcoin when building a transaction.
+
+## Sending Bitcoin
+
+1. Return to the assets search.
+2. Select **Send Bitcoin**.
+3. Enter the address of the recipient.
+
+> **Note:** You may **not** send your entire balance from multiple script types. This is a limitation of our wallet, not the protocol. You must select the source account and script type to send from, and you are limited to the balance of the specific script type. You also must account for fees, though the app has a built-in **Send Max** button. Just understand that the amount sent will never be exactly your balance.
+
+### Understanding The Fees Tab
+
+**TL;DR:** Select an average or better fee. Don’t go down the rabbit hole—it's a deep one. To avoid stress and being stuck in limbo, pay a moderate fee.
+
+---
+
+And that’s it! You can now send and receive Bitcoin using KeepKey Desktop!

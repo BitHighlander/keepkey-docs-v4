@@ -1,0 +1,85 @@
+---
+title: "Verify Firmware"
+description: "A step-by-step guide on compiling KeepKey firmware and verifying its authenticity to ensure device security."
+date: "2024-04-10"
+author: "Highlander"
+---
+
+import Image from 'next/image'
+
+_"Don’t trust, Verify."_
+<br/>
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+    <Image
+        src="https://miro.medium.com/v2/resize:fit:720/format:webp/1*SoLtXneB6KYfdToi-pvMmg.jpeg"
+        alt="KeepKey Firmware Verification Process"
+        width={700}
+        height={400}
+        layout="intrinsic"
+    />
+</div>
+
+# Reproducible Builds and Authenticating KeepKey Firmware
+
+In the realm of device security, particularly with hardware wallets like KeepKey, the maxim _"Don’t trust, Verify"_ couldn't be more relevant. How can you be sure that what is displayed on your KeepKey's screen is what's truly being signed? How do you know if the device is signing a transaction to your intended target and not maliciously redirecting your funds? The integrity of your private keys—ensuring they remain confidential and within the device—is paramount.
+
+_"It takes a Village."_
+
+Trust in the digital security domain is a communal effort, underscored by rigorous scrutiny and peer review, especially for open-source firmware like KeepKey's. This article delves into the history of KeepKey, underscoring the essential role of community engagement and transparency in ensuring device security.
+
+## Overview
+
+Today, we will explore how to compile KeepKey firmware and verify that the code on your device matches the publicly available source code from KeepKey. This process underscores the importance of open-source firmware and demonstrates how reproducible builds form the foundation of KeepKey's trustworthiness.
+
+### Step 1: Compile KeepKey Firmware
+
+#### Pre-Requisites:
+
+- Docker
+- Git
+
+First, clone the KeepKey firmware repository:
+
+```bash
+git clone https://github.com/keepkey/keepkey-firmware
+```
+
+Next, checkout the commit of the release:
+
+```bash
+git checkout <commit-hash>
+```
+
+Install submodules:
+
+```bash
+git submodule update --init --recursive
+```
+
+Build the firmware:
+
+```bash
+./scripts/build/docker/device/release.sh
+```
+
+## Step 2: Create Hash of Compiled Firmware
+
+Generate the hash of the unsigned firmware you built locally:
+
+```bash
+tail -c +257 ./bin/firmware.keepkey.bin | shasum -a 256
+```
+
+## Step 3: Compare with Hash of Released and Signed Firmware
+
+Finally, compare your hash with the hash of the firmware binary downloaded from the KeepKey releases page:
+
+```bash
+tail -c +257 'firmware.keepkey (version).bin' | shasum -a 256
+```
+
+If the hashes match, the integrity of the firmware is confirmed. If not, the process should be reviewed and attempted again.
+
+# Conclusion
+
+By following this guide, you've taken a crucial step in validating the signed firmware released by KeepKey against its source code. This ensures that the firmware's behavior on your device aligns with the peer-reviewed code in the repository, fortifying your trust in KeepKey's security measures.

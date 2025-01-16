@@ -1,0 +1,204 @@
+import Image from 'next/image';
+
+# Dispelling Misconceptions
+
+In the ever-evolving world of cryptocurrency, misconceptions can run rampant, particularly when it comes to hardware wallets. Here are five common myths that many people often misconstrue:
+
+## 1. Using a Hardware Wallet Renders You Immune to Hacking
+
+Imagine a scenario where you wake up to find a message from a member of your Decentralized Autonomous Organization (DAO) asking you to sign and vote on a proposal.
+
+You’re a MetaMask user who uses a Ledger hardware wallet and you’re prompted to sign the message offline. This situation exemplifies the concept known as “blind signing.”
+
+However, as highlighted by the unfortunate case of Kevin Rose, it is clear that using MetaMask and a Ledger hardware wallet doesn’t make you immune to phishing attacks. Lack of transaction insight resulted in Rose losing $1.1 million worth of NFTs. Regardless of whether you’re using a hardware wallet.
+
+So how do I protect myself and my assets when using a hardware wallet?
+
+You must remain vigilant, understand and verify every contract interaction you sign. To do this, you must gain insight into what you are signing!
+
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+    <Image
+        src="https://miro.medium.com/v2/resize:fit:640/format:webp/1*MNV7K8GaTjsRgL8rZ1iW-w.png"
+        alt="Updating Firmware"
+        width={300}
+        height={200}
+    />
+</div>
+
+“Is this contract action dangerous?”
+
+By analyzing and simulating the execution of the contract interaction Harpie.io is giving you insight to the risk factor of the action taken. Just because an action is dangerous doesn’t mean it’s malicious, however if this field is true extra caution should be taken before signing.
+
+“Is this contract malicious?”
+
+Harpie.io tracks malicious contracts on the network; scammers and known bad actors are identified. It is strongly recommended you reject any transaction that is flagged malicious.
+
+“Is this contract trusted?”
+
+Harpie.io maintains a large whitelist of known contracts in the ecosystem. You can be confident that a transaction with a known actor is much less likely to be a scam or phishing transaction if this flag is true.
+
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+    <Image
+        src="https://miro.medium.com/v2/resize:fit:720/format:webp/1*3dpUW2JaZBXvTxPQQ5HAjA.png"
+        alt="Contract Analysis"
+        width={360}
+        height={240}
+    />
+</div>
+
+## 2. Ledger Secure Enclaves Enhance the Overall Security of Hardware Wallets
+
+The Ledger Secure enclave operates as a black box. It utilizes a common chip found in financial and other institutional contexts, but it is not open source. Furthermore, it is not audited by the crypto community. Frankly put, while you might own the hardware, you don’t truly own your keys on that device (although you, of course, own your backup). The inability to update it or understand its inner workings puts limitations on your ownership.
+
+Terms:
+
+- **Secure Enclave:** The Secure Enclave is a specific component found in certain hardware devices, such as Apple’s iPhones and iPads. It is a separate coprocessor within the device’s system-on-chip (SoC) that provides a high level of security for handling sensitive operations, particularly related to cryptographic key management.
+- **Secure Element:** A secure element, on the other hand, is a different concept. It refers to a tamper-resistant hardware component that stores and processes sensitive information securely. In the context of Ledger devices (e.g., Ledger hardware wallets), the secure element is a dedicated chip that handles private key storage and cryptographic operations.
+
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+    <Image
+        src="https://miro.medium.com/v2/resize:fit:4800/format:webp/1*wW-q-vm3GUEH00HaKkPSWw.png"
+        alt="Secure Elements"
+        width={480}
+        height={320}
+    />
+</div>
+
+The Secure enclave itself cannot sign transactions. When it’s time for transactions to be signed, the enclave releases the key material and allows the firmware to sign. Therefore, the actual security lies in this firmware that runs in the secure element as a whole. Just like the enclave, you don’t own Ledger’s firmware either. It’s not open source, it’s unauditable, and unlike the enclave that is from the banking industry and audited, their firmware hasn’t undergone peer review. This whole system must be reviewed for its security.
+
+Ledger has promised to open-source their firmware to some extent. However, they can’t completely do so due to legal restrictions imposed by the manufacturer of their enclave chip. Nonetheless, this is a step in the right direction and shows a good faith effort to open source more of their firmware. Similarly, we commend Grid+ for their promise to open source their hardware. However, it’s crucial to understand that other manufacturers have had their firmware open source for nearly a decade.
+
+These open-source firmware have been under continuous scrutiny by security researchers over the years, leading to identification and rectification of issues. These hardware devices have hence become more robust. The process of finding and fixing these issues is time-consuming, underlining the substantial benefit of longstanding open-source solutions.
+
+For instance,
+
+CVE-2019–14353: (3) A side channel for the row-based OLED display was discovered. The power consumption of each row-based display cycle depends on the number of illuminated pixels, potentially allowing for a partial recovery of display contents.
+
+Reporter: Christian Reitter
+
+The fix:
+
+By displaying an equal number of pixels on both sides of the screen, every row contains exactly the same amount of pixels, making it impossible to measure differences in resistance at these positions. Hundreds of such vulnerabilities have been reported and patched over the years. In all hardware wallets firmwares…. except ledgers. Because it is not open source, it is missing out on the most important factor to a hardware wallets security, peer review. You can find more information on this and more patched exploits here. [List Of Hardware Wallet Hacks](https://thecharlatan.ch/List-Of-Hardware-Wallet-Hacks/)
+
+Here is an article outlining many of these nuances that have been identified and fixed in all open-source hardware wallets, including ones like Coldcard that use secure elements themselves. This community involvement is what is the most important in future of hardware wallets, and how we push forward as an industry.
+
+Recently, Ledger has moved towards “accelerating their timeline” to open-source their firmware. However, they will always fall short of fully open sourcing due to their obligations to the chip manufacturer.
+
+“GridPlus to open-source wallet firmware in Q3 amid Ledger debacle” Following suit is Grid+.
+
+Ngrave, another closed-source wallet, has yet to announce plans to open source their firmware.
+
+“Furthermore, we use a secure element for storage of the most sensitive data, which we also are not at liberty to open source. Those chips are, by design, closed source, and receive some sort of government certification.” “However, we don’t rely entirely on those chips while creating your keys, as it has been proven in the past that some governments have implemented backdoors. This is why we use entropy.” -Ngrave Support
+
+The end result is that regardless of the secure element, Ledger themselves can compromise the physical security of their devices. This is also true for the chip manufacturer and any government entity or institution that collaborates with these chip manufacturers.
+
+We at KeepKey believe that using these closed-source black boxes is a distraction and, ultimately, insufficient for the needs of the crypto industry. while these companies may get short term strengths at specific attack vectors, the long game of this industry is provide these strong cryptografic solutions in a way the community itself can own, verify, and improve these security systems themselves.
+
+“Dont trust, verify”
+
+So, where do we go from here?
+
+True open-source secure enclaves are on the horizon!
+
+“I am very proud of the team for having managed to complete the first production run of the prototypes and having concrete results from the evaluation. This brings us substantially closer to mass production and closer to the introduction of the first transparent solution. These chips will then have the chance to fundamentally change the current security standards in the market,” says Evzen Englberth, CEO of Tropic Square. (1)
+
+The hard truth is that all hardware wallets currently on the market are insufficient to protect against physical attacks. However, this will not always be the case.
+
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+    <Image
+        src="https://miro.medium.com/v2/resize:fit:720/format:webp/1*ccoDBo6SuZcaPQ905F1Mqg.png"
+        alt="Transparent Solution Progress"
+        width={360}
+        height={240}
+    />
+</div>
+
+## 3. “Offline” or “Airgapped” Hardware Wallets Are More Secure
+
+This myth is often echoed in the industry even to this day.
+
+Some wallets, like Ellipal, Safepal, and ngrave use “air-gapped” protocols utilizing QR codes and cameras to transfer data. However, whether a hardware wallet communicates via USB, Bluetooth, or QR codes does not impact the security of the device in any meaningful way.
+
+Transparency of a system must come from the entire stack. Auditing the data going into a black box, or leaving the back box, does not provide transparency in the device itself.
+
+The security of the device is the connection between the memory and processor holding your private key and the screen displaying the data to you. It is the duty of the device to display to you the information you are signing in a human readable way.
+
+connection between the memory and its screen — the crucial link for the device’s security. While the audibility of a QR code might be more straightforward for non-tech-savvy individuals, in practice, the sheer number of QR codes exchanged in these protocols is substantial. The likelihood that any user would decode and audit this protocol on every transaction is slim. This action would only be necessary if you distrust the device itself. All protocols are auditable, bluetooth, usb cables the method of communication does not enhance the device’s security strength. The security of the wallet is based on the transparency and audibility of the entire system.
+
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+    <Image
+        src="https://miro.medium.com/v2/resize:fit:720/format:webp/1*DpgUTNKm_OFJifmlK8Qumw.png"
+        alt="Airgapped Wallets"
+        width={360}
+        height={240}
+    />
+</div>
+
+## 4. Card-Based “Hardware Wallets” Without Screens Are Equally Secure as Other Mainstream Wallets
+
+The security of a hardware device hinges on the physical security of its memory (storage of your seed) and the screen. Any adversary aims to interfere with this connection. A hardware wallet without a screen provides no way for you to verify what you are signing, leaving you blindly signing every transaction. This setup means you can’t differentiate whether a transaction sends $1 or all your funds, or whether it’s purchasing an NFT or transferring all your tokens to a hacker. Your “wallet” is only as secure as the device it’s connected to, which in the case of a cellphone, isn’t very secure.
+
+If a hardware wallet does not contain a screen, it is not a hardware wallet, it is a blind signer and has no business being compared to actual hardware wallet systems.
+
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+    <Image
+        src="https://miro.medium.com/v2/resize:fit:720/format:webp/1*QbyJ9s36nM28ZcWiKZgAOw.png"
+        alt="Card-Based Wallets"
+        width={360}
+        height={240}
+    />
+</div>
+
+## 5. Device Attestation prevents tampering with devices
+
+You Can’t Verify the Supply Chain Authenticity. The true answer is this is an unsolved attack vector. Attestation is, in many ways, a gimmick providing a false sense of security. Even if a device’s internals have been tampered with, attestation can still pass, potentially resulting in a loss of funds.(2)
+
+We’ve seen this with modified Ledgers and trezors in the wild. Trezor has a useful blog post about this topic. An underrated security feature on a KeepKey and elipals value is its tamper-evident metal casing. Unlike Ledger and Trezor, which have more fragile plastic casings, tampering and reconstituting a KeepKey would be significantly more challenging, albeit not impossible.
+
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+    <Image
+        src="https://miro.medium.com/v2/resize:fit:640/format:webp/1*2qaofZJ_5QdJKBiBun7aSA.jpeg"
+        alt="Modified Ledger"
+        width={320}
+        height={213}
+    />
+</div>
+
+Here is a modified Ledger
+
+Modified ledger can pass device attestation. (2) Meaning that all this process is doing is making a user “feel” better about receiving their device.
+
+At the end of the day there is no fool proof way to prevent supply chain attacks.
+
+While Grid+ has yet to open source their enclave or allow for community audits, there is anticipation that in the future, when these actions are taken, their enclave, along with the implementation of microwires, will be recognized as highly robust. Consequently, we can expect a growing number of companies to follow suit by incorporating similar systems into their wallets.
+
+“The anti-tamper mesh is a Laser Directed Structure (LDS) mesh — you could say a 3D maze of tiny electrical traces with a waveform running through it constantly. If it’s shorted out or the waveform is altered — the device bricks.”(5)
+
+# Conclusions
+
+There has been a lot of discussion of hardware wallets after the ledger controversy. We ourselves at keepkey have seen well over 1000pct increase in sales recently. But its important to understand the main points of this presentation is there are no perfect solutions, and no perfect products.
+
+While there is a lot of discussion of ledger secure element. the vast majority of loss of funds accur from blind signing, mismanagement of keys, phishing and other “remote” attack vectors.
+
+This is why at keepkey we are focused on our wallet connection protocols. By adding security features into wallet connect and our multi-chain REST dapp -> wallet protocols we can add transaction insight and extended validation into the who/what/why of transactions before you send them to your device to sign.
+
+The entire space has a lot to do in this space to get better.
+
+The bip39 passphrase
+At the end of the day the best protection against physical attacks is the passphrase.
+
+However 2048 rounds is indeed an extraordinarily low number of rounds for PBKDF2 as unfortunately not very strong.
+
+the number of rounds is chosen by the BIP-39 standard so you can’t alter it Or your seed phrase will make different keys.
+
+This number was chosen low because the processing limiting power on hardware wallets. as we improve our hardware these number will get much larger and dramatically prevent the ability for brute forcing.
+
+A moderately sized server would take about a month or two of processing power to brute force this with a normal 16-ish character password.
+
+In the future as hardware wallets evolve we will see a larger amount of rounds and it will get to the point brute forcing will be impossible regardless of the amount of compute an attacker has access too.
+
+# In Summary
+
+Hardware wallets are not magic, and can not prevent you from signing malicious transactions and blind signing remains a constant concern. This is by far the “lowest hanging fruit” for improving hardware wallets. Secure enclaves as they exist are black boxes and do not operate the way most people were under the impression they do. As ledgers social recovery being added into ledger showed, private keys are able to leave the secure element. And then your only protection is the firmware itself. Air Gapping a wallet does NOT make it more secure, you are still dependent on the operation of the device itself, and integrity of the on device system. There are many “hardware wallets” that simply isolate the private keys but take no effort in viewing a transaction for validation. Rendering their entire security model very weak and really puts their level of protection a distinct tier underneath “true” hardware wallets Physical security is really the final frontier in hardware wallets, and there are great advancements being brought into the market, but until these systems are open sourced the crypto community is simply unable to verify and improve them. KeepKeys vision for the future.
+
+Open Source secure enclave is principal to the future of hardware wallets. We are excited for the innovations Tropic Square and the power of RISC-V open architecture chips. There are many things to be learned from grid+ and ngrave about physical security and we intend to put them into our next v2 device. The community as a whole has a duty to hold hardware wallet companies accountable, and demand a greater amount of transparency than we currently have. At the end of the day you get to vote with your wallet, and rejecting wallets that do not meet these thresholds should be abject of all hardware wallet users

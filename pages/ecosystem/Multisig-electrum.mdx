@@ -1,0 +1,91 @@
+# Storing Bitcoin with Multisig with your KeepKey and Electrum
+
+**KeepKey @KeepKeyDevs - Aug 31**
+
+### Using Electrum to Manage Your Bitcoin on a KeepKey
+
+Bitcoin multisig is a type of wallet that requires multiple signatures to send or spend funds. It’s an important security feature that ensures funds are only spent when multiple parties agree. This protects against theft, malicious actors, and unauthorized transactions.
+
+With multisig, each transaction must be approved by multiple individuals, adding an extra layer of security and making it more difficult for someone to gain access to your funds without authorization. Additionally, it helps protect against the loss of private keys—if one key is lost, the other keys can still sign transactions.
+
+---
+
+## Download Electrum and Set Up KeepKey
+
+- **Download Electrum [here](https://electrum.org).**
+![Electrum Download](https://pbs.twimg.com/media/GWU02TsXsAEgE9K.png)
+- **Start the application.**
+- **Select "Use hardware device."**
+![Select Hardware Device](https://pbs.twimg.com/media/GWU04ZuWgAAMJFK?format=png&name=small)
+- **Scan for KeepKey** (ensure no other applications are running).
+![Scan for KeepKey](https://pbs.twimg.com/media/GWU07RwWoAAe_eQ?format=png&name=small)
+- **Enter your KeepKey PIN** (if enabled).
+![Enter KeepKey PIN](https://pbs.twimg.com/media/GWU0-OVX0AAHIKo?format=png&name=small)
+- **Select your script type:**
+![Select Script Type](https://pbs.twimg.com/media/GWU1AYeX0AAjBhy?format=png&name=small)
+
+---
+
+### Script Types:
+
+- **Bitcoin Legacy P2PKH**: The original Bitcoin script type, which requires the sender to provide the recipient's public key to create the transaction.
+- **P2SH-SegWit**: An upgrade to P2PKH that uses SegWit technology, requiring a redeem script to create transactions.
+- **Native SegWit**: A newer script type using native SegWit, not backward compatible with Legacy P2PKH, and requiring a witness program for transaction verification.
+
+> If you use a BIP39 passphrase, enter it. [More info on passphrases](https://electrum.org/bip39).
+
+---
+
+## Multisig Wallets
+
+This tutorial shows how to create a **2-of-2 multisig wallet**. This setup consists of two separate wallets (usually on different machines and potentially controlled by separate individuals) that must be used together to access the funds. Both wallets generate the same set of addresses.
+
+---
+
+### Create a Pair of 2-of-2 Wallets:
+
+1. **Each cosigner needs to follow these steps**:
+- In the menu, select **File -> New**, then choose "Multi-signature wallet."
+![Multi-signature Wallet](https://pbs.twimg.com/media/GWU1DOFXsAA8wbK?format=png&name=small)
+- On the next screen, select **2 of 2**.
+![Select 2-of-2](https://pbs.twimg.com/media/GWU1F2ZXoAAdqHy?format=png&name=small)
+- Connect your KeepKey and provide the master public key of the other wallet.
+![Provide Master Public Key](https://pbs.twimg.com/media/GWU1IwwXcAATENL?format=png&name=small)
+- Enter the other wallet's master public key in the lower box (when you create the other wallet, you’ll reverse this process).
+
+2. **Note**: You can cancel this step and reopen the file later.
+
+---
+
+### Receiving Bitcoin:
+
+- Both wallets should generate the same set of addresses. You can now send funds to these addresses (starting with "3") using any wallet that supports P2SH addresses.
+
+---
+
+### Spending Bitcoin:
+
+To spend from a 2-of-2 wallet, two cosigners must sign a transaction collaboratively:
+
+1. **Create a transaction** using one of the wallets (via the “Send” tab).
+2. **Sign the transaction**, and a window with the transaction details will appear.
+![Transaction Details](https://pbs.twimg.com/media/GWU1LRKXIAAO4Bs?format=png&name=small)
+3. The transaction needs to be sent to the second wallet for cosigning. Here are your options:
+
+---
+
+### Methods for Transferring the Partially Signed Transaction:
+
+- **Transfer a File**: Save the partially signed transaction to a file, transfer it (e.g., via USB stick) to the second wallet, and load it (using Tools -> Load transaction -> from file).
+- **Use QR Code**: Display the transaction as a QR code and scan it into the second wallet (using Tools -> Load Transaction -> From QR Code).
+- **Use the Cosigner Pool Plugin**: Enable the plugin (Tools -> Plugins) in both wallets. This allows sending the partially signed transaction to a central server, encrypted with the cosigner's master public key. The cosigner will be notified when the transaction is ready, and they can sign it using their password to decrypt.
+
+---
+
+### Finalizing the Transaction:
+
+Once both signatures are added, the transaction can be broadcast to the network.
+
+---
+
+For more information on Electrum, check out the [Electrum documentation](https://electrum.readthedocs.io/en/latest/index.html).
