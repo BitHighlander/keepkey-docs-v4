@@ -1,0 +1,67 @@
+# How to Restore Your Wallet
+
+Upon connecting a new KeepKey, you will be prompted with initialization. A device without a seed phrase stored in its long-term memory will be detected as uninitialized.
+
+**Note**: If you already have a setup device, you do **not** need to follow this guide!
+
+If you are having trouble connecting your device, follow [this guide](link-to-trouble-connecting-guide).
+
+## Initialization Flow:
+
+1. **Select Recover Wallet**
+
+### Recovery Options:
+
+- KeepKey defaults to 12 words, but the restore process is compatible with longer phrases if you are importing your seed from other wallets.
+- If you're generating a seed phrase and are unsure what length to use, the answer is almost always 12 as there are no security improvements from using a 24-word seed. [Learn more](https://example.com/link-to-security-info).
+
+2. **Label your KeepKey**
+
+   Keep this short, and do not use special characters.
+
+3. **Pin Setup**
+
+   You are setting a new PIN for your device. You may select any length greater than 1 and less than 16. If you ever forget your PIN, you will be required to wipe your device and restart this restore process.
+
+   The device will display your cipher, and you must combine this cipher with the displayed pad on the application to complete this process. You must enter the same PIN twice, or you will be asked to repeat the PIN setup process.
+
+   ![Your Device Cipher](/path/to/your/image.jpg "Device Cipher Display")
+
+### Notes for Developers:
+
+- You may use a single-digit PIN, and PINs may be removed after setup.
+
+## Recovery Process
+
+**Average Time to Completion: 5–10 Minutes**
+
+The recovery process also uses a Cipher. It is a fully scrambled text input with letters from A to Z. After every keystroke entered by the keyboard, the cipher scrambles. This is necessary due to the sensitive nature of this keyphrase.
+
+### Autocomplete:
+
+- Nearly every word in BIP39 can be autocompleted by entering just the first 3–4 characters. This greatly speeds up the key entry.
+
+#### How it Works:
+
+Notice that the top column is A-Z in order, and the bottom letters are the cipher. To enter a letter, find the corresponding letter in the top column. For instance, if the first letter of the first word of your mnemonic is the letter “A,” you would type “O” on your keyboard.
+
+After pressing this letter on your keyboard, the letter “A” will display on your KeepKey Device. Only your device will be able to understand the words being entered.
+
+![Autocomplete Example](/path/to/autocomplete/image.jpg "Autocomplete in Action")
+
+The application will display the encrypted word to indicate the user is ready for the next letter. After every keypress, the cipher will change. When complete, press the button on the KeepKey to continue.
+
+### Notes:
+
+- If you need to go back, you can press “backspace”!
+- It is NOT possible to skip backward; you will be required to re-enter the words when you go back.
+- Autocomplete words will display on the device. If the entire word is not being displayed, you must continue to enter more letters.
+- It is not possible to validate the seed phrase until the process is complete. Any misplaced words will require starting from the beginning.
+
+### Failure:
+
+If you fail to restore, you will be displayed this error. You must unplug and reconnect your KeepKey to try again. Verify your word list here:
+
+[https://github.com/bitcoin/bips/blob/master/bip-0039/english.txt](https://github.com/bitcoin/bips/blob/master/bip-0039/english.txt)
+
+Upon successful completion, both your KeepKey and the application will restart. You will be brought into your default application on startup.
