@@ -5,9 +5,8 @@
     "type": "page"
   },
   "setup": "Setup",
-  "recovery": "Recovery",
-  "interoperability": "Interoperability",
-  "developer": "Developer",
+  "support": "support",
+  "developers": "developers",
   "contact": {
     "title": "Contact ↗",
     "type": "page",
