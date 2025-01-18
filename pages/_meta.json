@@ -5,8 +5,9 @@
     "type": "page"
   },
   "setup": "Setup",
-  "support": "support",
-  "developers": "developers",
+  "support": "Support",
+  "learn": "Learn",
+  "developers": "Developers",
   "contact": {
     "title": "Contact ↗",
     "type": "page",

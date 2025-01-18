@@ -1,8 +1,5 @@
 {
   "index": "Getting Started",
-  "products": "Product Overview",
   "Pin": "Set PIN",
-  "recovery": "Recovery Process",
-  "troubleshoot": "Troubleshooting",
-  "interoperability": "Interoperability Guide"
+  "recovery": "Recovery Process"
 }

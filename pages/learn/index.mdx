@@ -1,0 +1,102 @@
+# KeepKey Educational Documentation
+
+### Security basics
+
+---
+
+## The Importance of BIP39
+
+Before BIP39 (and its companion standard BIP32), Bitcoin wallets stored keypairs in a file on your computer (for example, with older versions of Bitcoin Core/bitcoind). If that file was lost or corrupted, your funds were gone forever. Every time you generated new addresses, you had to back up the file again, or risk losing any funds sent to newly created addresses.
+
+BIP39 revolutionized this process by introducing a durable, stateless recovery method for your wallet: a list of easy-to-write-down words known as a **recovery phrase** (sometimes called a **seed phrase**). Now, instead of juggling multiple keyfiles, you simply need to protect this single list of words. As long as you keep your BIP39 recovery phrase safe, you can restore your wallet and funds on any compatible hardware or software wallet—even if your device is lost, stolen, or damaged.
+
+Below are essential tips to ensure your recovery phrase remains safe and uncompromised.
+
+---
+
+## Safeguarding Your Recovery Phrase
+
+1. **Only Trust Your KeepKey Screen**
+   - During the initial setup, your KeepKey will display a 12 recovery phrase (depending on your wallet settings). These words **never** come pre-printed in the box. Any “recovery sheet” you receive is meant to be blank.
+   - Always verify each word carefully as it appears on your KeepKey’s screen.
+
+2. **Stay Strictly Offline**
+   - **Do not** make any digital copy of your recovery phrase (no photos, screenshots, scans, or notes on a computer or phone).
+   - Avoid password managers or cloud backups for your phrase.
+   - Your recovery phrase should remain entirely offline.
+
+3. **Write It Down Correctly**
+   - Use a pen, not a pencil (which can fade or smudge).
+   - Write neatly in capital letters.
+   - Number each word in the correct order.
+   - Verify each word’s spelling against a BIP39 word list, if you’re unsure.
+
+4. **Store Physical Copies Securely**
+   - Maintain **at least one** physical copy in a secure place (e.g., a safe or safety deposit box).
+   - Memorizing your recovery phrase is **not** reliable for long-term cold storage.
+
+5. **Never “Scramble” Your Recovery Words**
+   - Storing words out of order or swapping them around is risky. Recovery phrases must be used in their exact sequence to work.
+
+6. **Don’t Mix Seeds from Different Wallets**
+   - **Never** input your KeepKey recovery phrase into Metamask or any other software wallet. Doing so compromises the security of your seed.
+   - **Never** load an online-generated seed (e.g., Metamask’s 12-word phrase) onto your KeepKey. Metamask’s seed was generated online, making it less secure by design.
+
+7. **Stay Alert to Scams**
+   - Be cautious of any offers or airdrops that ask for your seed phrase.
+   - If an offer seems too good to be true, it likely is.
+   - No reputable hardware wallet company will ever ask for your recovery phrase or PIN code.
+
+8. **Protect Against Physical Attacks**
+   - Keep your device and seed phrase in separate, secure locations if possible.
+   - Consider whether you need added layers of security to mitigate theft or physical threats.
+
+9. **Consider Metal Backups**
+   - Products like a Crypto Steel Capsule Solo can protect your seed phrase from physical damage like fire or water.
+
+10. **What If You Lose It All?**
+   - If you lose both your KeepKey device and the written recovery phrase, you lose access to your funds.
+   - Some services provide optional backup or insurance products—but always research their security trade-offs carefully.
+
+---
+
+## PIN Code Security
+
+Like the recovery phrase, your PIN code is critical to maintaining your security. A strong PIN ensures that even if someone gains physical access to your KeepKey, they cannot easily access your funds. Here are the guidelines:
+
+1. **Choose Your Own PIN**
+   - Make sure you pick your PIN yourself during the device’s initial setup.
+   - Never reuse a PIN someone else sets for you.
+
+2. **Enter Your PIN Privately**
+   - Shield your screen when typing, and do not enter your PIN in public or around strangers.
+
+3. **Avoid Storing Your PIN Digitally**
+   - Don’t keep your PIN on your phone or computer. If your device is compromised, so is your PIN.
+
+4. **Change a Compromised PIN Immediately**
+   - If you suspect your PIN is known to someone else, change it at once.
+
+5. **Keep Three Strikes in Mind**
+   - Entering three incorrect PINs in a row will factory-reset your KeepKey.
+   - The only way to recover your accounts afterwards is by re-entering your recovery phrase.
+
+6. **Use a Strong PIN**
+   - An 8-digit PIN is more secure than a 4-digit PIN.
+   - Avoid simple, guessable sequences like `0000`, `1234`, `55555555`, or your birth date.
+
+---
+
+## Advanced Security Features
+
+- **Passphrase (Advanced Users Only)**
+  - Some devices support an extra passphrase on top of your recovery phrase. This provides an additional layer of protection, but using it incorrectly can also lock you out of your funds.
+  - If you’re considering a passphrase, make sure you understand how it works and always keep it securely documented.
+
+---
+
+## Final Thoughts
+
+BIP39 (and BIP32) were game-changing standards for user-friendly, resilient self-custody. By introducing a simple list of words as a “master” backup, these standards resolved many issues that plagued the early Bitcoin ecosystem. Protecting your BIP39 seed phrase is the single most important step in preventing lost funds.
+
+By following the tips above, you can confidently maintain control of your KeepKey wallet and ensure that your crypto assets remain safe—no matter what surprises life throws your way.
