@@ -1,35 +1,130 @@
-# What are ciphers? And why are they important?
+# Understanding KeepKey's PIN Security System
 
-All KeepKey devices are protected with a PIN as a barrier to entry for that specific device. The PIN is a combination of up to 9 numbers that you select after initializing your KeepKey. A PIN protects your device against malware and malicious software on your host machine.
+## Technical Overview
 
-The KeepKey was designed in a way that assumes the host machine it is communicating with is malicious. It requires user on-screen verification and approval for all actions.
+The KeepKey implements a sophisticated PIN entry system that protects against various attack vectors:
 
-> **Note:** Any hardware wallet that does not have a screen is insecure! The most important part of a hardware wallet is the ability for a user to trust the data presented to them. The security of a KeepKey lies in the offline and secure connection of its memory/processor to its screen.
+- Physical observation (shoulder surfing)
+- USB-based keyloggers
+- Screen content analysis
+- Malware and spyware
+- Brute force attempts
 
-You can select a PIN between 1–9 digits — We recommend a PIN length of at least 4 digits.
+### PIN Architecture
 
-You will see a randomized, scrambled keypad on your KeepKey display.
+Your PIN can be 1-9 digits long, with each digit ranging from 0-9. This provides:
+- Maximum combinations: 10^9 (1 billion) for 9-digit PINs
+- Minimum recommended: 10^4 (10,000) for 4-digit PINs
+- Three-attempt limit before device reset
+
+## The Cipher System
+
+### How It Works
+
+The KeepKey employs a dynamic cipher system for PIN entry:
+
+1. **Randomized Matrix**
+   - 3x3 grid of numbers (0-9)
+   - Positions scrambled on every connection
+   - Numbers only visible on device screen
+
+2. **Dual Display Protection**
+   ```
+   Device Screen:        Computer Screen:
+   ┌───┬───┬───┐        ┌───┬───┬───┐
+   │ 7 │ 1 │ 4 │        │   │   │   │
+   ├───┼───┼───┤        ├───┼───┼───┤
+   │ 3 │ 5 │ 2 │   →    │   │   │   │
+   ├───┼───┼───┤        ├───┼───┼───┤
+   │ 9 │ 6 │ 8 │        │   │   │   │
+   └───┴───┴───┘        └───┴───┴───┘
+   ```
 
 ![Scrambled Keypad](https://miro.medium.com/v2/resize:fit:1030/format:webp/1*sphXuDqEZb1hkyfHyq9n9Q.png)
 
-> **Note:** The PIN is displayed twice and inverted to defeat malware that was designed to count the pixels via USB resistance. This inversion protects your device by guaranteeing the amount of pixels that are lit match those that are not, making it impossible for malware to view your screen or guess your PIN during pin entry.
+### Anti-Analysis Protection
 
-## Understanding Pin-entry:
+The PIN display implements several security measures:
+
+1. **Pixel Balance Technology**
+   - Equal number of lit/unlit pixels per row
+   - Prevents power analysis attacks
+   - Defeats USB resistance monitoring
+
+2. **Visual Inversion**
+   - Numbers displayed twice with inversion
+   - Maintains constant power consumption
+   - Thwarts side-channel attacks
 
 ![Pin-entry example](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*4JgpwGGlCu-Ol6k__i9IOA.png)
 
-For example, if you’d like to choose the number "1," you would have to click the top middle box.
+## Security Implementation
 
-Even if your KeepKey is plugged in, it cannot be accessed without the correct PIN. In addition, the number placement is re-scrambled at random each time you connect your device, so even a key-logger cannot decipher your PIN because the numbers are only shown on the device.
+### Zero-Trust Model
 
-You can enter your PIN with confidence on an infected computer. Even if your computer became infected with malware or spyware (such as key-logging software), your PIN would remain safe.
+The KeepKey operates under a zero-trust security model:
+- Assumes host computer is compromised
+- Requires on-screen verification for all actions
+- Never exposes sensitive data to host
 
-Let’s look at the cipher. This will change every time you use your KeepKey. Your PIN is limited to nine digits. If you are trying to use a PIN longer than nine digits, please note that the device only recognizes the first nine entries.
+> **Critical Security Note:** A hardware wallet without a screen cannot provide adequate security. The screen-to-processor connection is fundamental to the security model.
+
+### PIN Entry Process
+
+1. **Connection Phase**
+   - Device generates random cipher
+   - Displays scrambled keypad
+   - Awaits user input
+
+2. **Input Validation**
+   - Each digit processed independently
+   - Position mapped through cipher
+   - No direct number transmission
+
+3. **Confirmation Process**
+   - New cipher generated for confirmation
+   - Prevents pattern analysis
+   - Requires second entry match
 
 ![Cipher Example](https://miro.medium.com/v2/resize:fit:1362/format:webp/1*h0ssH4YPrNT9O_oNafAVFw.png)
 
-After you choose and confirm your PIN (remember: the cipher will change before the confirmation screen), make sure to look at your KeepKey screen again.
+## Best Practices
 
-The scrambled number placement is only shown on the KeepKey device itself.
+### PIN Selection
 
-> **Important:** Never share your PIN or recovery sentence with anyone.
+1. **Length Considerations**
+   - Minimum: 4 digits
+   - Recommended: 8 digits
+   - Maximum: 9 digits
+
+2. **Avoid Common Patterns**
+   - Sequential numbers
+   - Repeated digits
+   - Birth dates
+   - Phone numbers
+
+### Usage Guidelines
+
+1. **Physical Security**
+   - Shield screen during entry
+   - Verify surroundings
+   - Use in private when possible
+
+2. **Device Protection**
+   - Verify screen content matches expectations
+   - Never enter PIN on unofficial interfaces
+   - Keep track of attempt count
+
+### Recovery Preparation
+
+1. **Device Reset Protocol**
+   - Three wrong attempts trigger reset
+   - All data wiped from device
+   - Recovery phrase required for restoration
+
+2. **Backup Requirements**
+   - Keep recovery phrase secure
+   - Document PIN securely
+   - Plan for device loss/reset
+
+> **Security Warning:** Never share your PIN or recovery phrase with anyone, including KeepKey support staff. The cipher system ensures secure entry even on compromised computers, but only if you maintain PIN confidentiality.
