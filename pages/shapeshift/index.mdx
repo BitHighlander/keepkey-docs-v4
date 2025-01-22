@@ -1,0 +1,153 @@
+What are accounts and Addresses, and how to mange them?
+
+Lets begin
+Don’t have KeepKey Desktop? go here
+
+To mange your funds you must use a dapp. There are many dapps in the ecosystem but the best one will want to use for sending bitcoin is ShapeShift. That is why we default to the ShapeShift dapp opening every time the application starts.
+
+(if for any reason you are not brought into ShapeShift on startup click here)
+
+
+Managing your #Bitcoin
+Search for Bitcoin (BTC)
+
+
+Press Receive Button
+
+
+To Receive bitcoin give this address to the person or exchange you are receiving bitcoin from.
+
+You can verify your bitcoin transactions here:
+
+Blockstream Block Explorer
+Blockstream Explorer is an open source block explorer providing detailed blockchain data across Bitcoin, Testnet, and…
+blockstream.info
+
+As well and view your history in the app.
+
+Understanding Address Script Types
+Legacy addresses: Legacy addresses are traditional Bitcoin addresses that begin with the number “1”. They are supported by most wallets and exchanges and are the most commonly used address type.
+
+SegWit P2SH: SegWit P2SH addresses are a type of SegWit address that start with the number “3” and are supported by most wallets and exchanges. They are a more secure and efficient way to send Bitcoin.
+
+Native SegWit: Native SegWit addresses are a type of SegWit address that start with the number “bc1” and are supported by most wallets and exchanges. They are the most secure and efficient way to send Bitcoin and have lower fees compared to other address types.
+
+TL:DR
+It’s important to understand.
+
+There are no wrong answers, No selection will result in loss of funds
+
+Segwit are slightly cheaper in transaction fee’s. However the fees gained from using native segwit do NOT justify moving your funds into them. Simply prefer segwit native when receiving NEW bitcoin into your wallet.
+
+Understanding Accounts
+account is a very loaded term. In the case of our application accounts are referring to specific paths in relation to bip39 derivation paths.
+
+Accounts can be used to segregate funds purely for accounting purposes. every account can produce an infinite amount of legacy/segwit-p2sh/segwit native addresses.
+
+Limiting account generation:
+
+In order to maximize the performance of the application we default to a single account. if you wish to segregate funds for accounts purposes you can follow the following procedure.
+
+Procede to accounts tab.
+
+2. Verify if you have used account0. if you have NOT and do not currently hold and bitcoin you MUST first fund your account0 with any* amount of bitcoin
+
+3. Press Add account. Select Bitcoin, and continue.
+
+
+Notice that both accounts contain all 3 script types. You may distribute funds to any of these paths and each path can generate an infinite amount of addresses. All accounts tracked by the app will register as source bitcoin when building a transaction.
+
+Sending Bitcoin
+return to assets search
+
+
+Select Send Bitcoin
+
+
+Enter the address of the user you wish to send Bitcoin too.
+
+
+note: you may NOT send your entire balance of your wallet. You are limited from sending from multiple script types. This is a limitation of our wallet, not the protocol. You must select the source account and script type you wish to send FROM, and are limited to balance of the specific script type. You also must account for fee’s, however the app has a built in sendMax button. just understand the amount sending will never be exactly your balance
+
+
+Understanding TheFees Tab.
+
+TL:DR
+Select average or better and don’t go down this rabbit hole… its a deep one. If you want to not stress and potentially be stuck in limbo for long periods just pay a moderate fee.
+
+And thats it, you can now send and receive bitcoin using keepkey desktop!
+
+for more support go to http://keepkey.com
+
+But for all those who dare ask the question
+
+“why does it cost a few dollars to send bitcoin sometimes?”
+
+its a long and complicated answer…
+
+….
+
+last chance
+
+Continue to my article on bitcoin fees
+
+
+The complicated world of how your wallet calculate transaction fees
+
+contents:
+UXTO selection and transaction size
+Dust and unspendable UTXO’s
+UXTO Selection Algorithms
+Understanding Miners Transaction Selections
+What to do with stuck transactions
+RBF and other measures to handle fee replacement
+Glossary
+Bitcoin: A decentralized digital currency created and held electronically.
+
+UTXO: Unspent Transaction Output — an output of a transaction that has not been used as an input in a new transaction.
+
+Altcoins: Any cryptocurrency other than Bitcoin.
+
+Dust: A tiny transaction amount, usually too small to be sent on its own.
+
+Miner: A computer that creates new blocks on the blockchain.
+
+Transaction: A record of a cryptocurrency exchange between two parties.
+
+Blockchain: A digital ledger that records and verifies transactions on a distributed network.
+
+UXTO selection and transaction size
+UXTO selection and transaction size refer to the process of choosing which Unspent Transaction Outputs (UXTOs) should be included in a given transaction, and the size of the resulting transaction. UXTOs are outputs from previous transactions which have not yet been spent. When creating a new transaction, the wallet software must select which UXTOs to include in order to meet the desired transaction size.
+
+For example, if the user wants to send 0.01 BTC, the wallet software must select one or more UXTOs to add up to at least 0.01 BTC. The inputs and outputs of the transaction, as well as its size in bytes and vbytes, will depend on the UXTOs selected. In this transaction, the user has selected three UXTOs (txids: 8793a, 8b7c8, and 8cc0c) with a total value of 0.03 BTC. The inputs of the transaction are therefore the three UXTOs selected and the outputs are the recipient’s address and the change address. The size of the transaction in bytes is 568, and in vbytes it is 144. The script type used for this transaction is the Pay-to-Public-Key-Hash (P2PKH).
+
+The cost of this transaction is 0.0005 BTC, which is roughly $4.50. This fee is the sum of the inputs minus the size of the outputs. In this case, the inputs are 0.03 BTC and the outputs are 0.029 BTC, resulting in a 0.0005 BTC fee.
+
+UXTO selection algorithms
+UXTO selection and transaction size refer to the process of choosing which Unspent Transaction Outputs (UXTOs) should be included in a given transaction, and the size of the resulting transaction. UXTOs are outputs from previous transactions which have not yet been spent. When creating a new transaction, the wallet software must select which UXTOs to include in order to meet the desired transaction size.
+
+coin selection algorithms, are used to select Unspent Transaction Outputs (UXTOs) from a wallet with the goal of creating a valid transaction. The algorithm works by selecting the smallest number of UXTOs necessary to match the amount of the transaction.
+
+These algorithms are used by wallets to select the UXTOs that result in the lowest fee when sending transactions.
+
+Other common selection algorithms include
+
+random selection
+greedy selection
+round-robin selection
+Random selection algorithms allow users to randomly select UXTOs from a wallet. Greedy selection algorithms select the largest UXTOs available in a wallet until the desired amount is reached. And round-robin selection algorithms select UXTOs in a sequential order from the wallet. As the size of a wallet increases, selecting UXTOs becomes more and more complex computationally. This is due to the fact that the algorithm must search through an increasing number of UXTOs to find the ones necessary to create a valid transaction. To overcome this complexity, blackjack selection algorithms can be used to reduce the number of UXTOs needed for a valid transaction.
+
+The smaller the transaction the less you pay in fee’s. The Better a wallet is at selecting inputs the more it saves you money!
+
+Understanding Miners Transaction Selections
+Miners select transactions to include in a block based on a variety of factors, including UXTO selection and transaction size. Miners typically choose transactions with the highest fees, which provide the highest reward for their work.
+
+The fee level of the network is a Monte Carlo calculation of the fee’s in the previous blocks. There are many services that use other algorithms for this, and its selection is kinda arbritary, because they are all algoritms trying to predict the future. How many transactions are going to join the mempool before your transaction get confirmed.
+
+They also consider the UXTO selection algorithm used and the size of the transaction, since larger transactions take up more space in the block.
+
+Segwit is a protocol level fee discount which reduces the fee paid by users. By moving how information in the transaction is stored on chain, Segwit enables wallets to get a discount on its selected UXTOs and reducing the fee associated with the transaction.
+
+at the end of the day you must have fee’s on your transaction that are larger then the next 1mb of transactions in the mempool. As well as just be lucky that the miner chose your transaction and not some one else’s. No amount of math can predict what users after you will submit into the mempool.
+
+The best bet is simply select a “high” fee level and hope for the best.
