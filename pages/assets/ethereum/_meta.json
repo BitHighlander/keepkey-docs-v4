@@ -1,0 +1,11 @@
+{
+  "index": {
+    "title": "Ethereum",
+    "display": "hidden"
+  },
+  "get-address": "Get Address",
+  "validate-address": "Validate Address",
+  "send-to-address": "Send to Address",
+  "tx-history": "Transaction History",
+  "erc20-tokens": "ERC-20 Tokens"
+} 

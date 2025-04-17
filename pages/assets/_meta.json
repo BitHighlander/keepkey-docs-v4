@@ -1,0 +1,11 @@
+{
+  "index": "Overview",
+  "bitcoin": "Bitcoin",
+  "ethereum": "Ethereum",
+  "litecoin": "Litecoin",
+  "bitcoin-cash": "Bitcoin Cash",
+  "dogecoin": "Dogecoin",
+  "cosmos": "Cosmos",
+  "osmosis": "Osmosis",
+  "ripple": "Ripple"
+} 
