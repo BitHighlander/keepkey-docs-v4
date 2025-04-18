@@ -1,0 +1,193 @@
+# Ethereum: Get Address
+
+## Overview
+This page demonstrates how to retrieve an Ethereum address from your KeepKey device using the KeepKey SDK. The address is derived directly on your hardware wallet, ensuring your private keys never leave the device. This same address is used for both Ethereum and all ERC-20 tokens.
+
+## Purpose
+Getting an Ethereum address allows you to:
+- Receive ETH and ERC-20 tokens from other parties
+- Verify your wallet is properly set up
+- Interact with Ethereum dApps and smart contracts
+- Confirm the device is correctly deriving addresses
+
+## Parameters
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| addressNList | number[] | BIP32 path to derive the address as an array of integers |
+| showDisplay | boolean | Whether to display the address on the KeepKey screen for verification |
+
+## Code Example
+
+```typescript
+import { KeepKeySdk } from '@keepkey/keepkey-sdk';
+
+/**
+ * Function to get an Ethereum address from KeepKey
+ * @param accountIndex - The account index to use (default: 0)
+ * @param addressIndex - The address index to use (default: 0)
+ * @param showOnDevice - Whether to display the address on the device (default: true)
+ */
+async function getEthereumAddress(
+  accountIndex = 0,
+  addressIndex = 0, 
+  showOnDevice = true
+) {
+  try {
+    // Check if KeepKey Desktop is running
+    try {
+      const response = await fetch('http://localhost:1646/docs', { 
+        signal: AbortSignal.timeout(2000)
+      });
+      
+      if (response.status !== 200) {
+        throw new Error('KeepKey Desktop not running');
+      }
+    } catch (error) {
+      console.error('Please make sure KeepKey Desktop is running');
+      throw new Error('KeepKey Desktop not running or not accessible');
+    }
+    
+    // Initialize SDK with your app information
+    const sdk = await KeepKeySdk.create({
+      apiKey: "ethereum-address-demo",
+      pairingInfo: {
+        name: "Ethereum Address Demo",
+        imageUrl: "https://example.com/ethereum-logo.png",
+        url: window.location.origin,
+      }
+    });
+    
+    // Construct the BIP44 path for Ethereum
+    // m/44'/60'/accountIndex'/0/addressIndex
+    const addressNList = [
+      0x8000002c,             // purpose: 44'
+      0x8000003c,             // coin_type: 60' (Ethereum)
+      0x80000000 + accountIndex, // account: accountIndex'
+      0,                      // change: 0 (external)
+      addressIndex            // address_index: addressIndex
+    ];
+    
+    // Define parameters for Ethereum address
+    const ethereumParams = {
+      addressNList,
+      showDisplay: showOnDevice
+    };
+    
+    // Get Ethereum address from device
+    const ethAddress = await sdk.ethGetAddress({
+      ethereumGetAddress: ethereumParams
+    });
+    
+    // Clean up the address string if it comes back with quotes
+    let formattedAddress = ethAddress;
+    if (typeof ethAddress === 'string' && ethAddress.startsWith('"') && ethAddress.endsWith('"')) {
+      formattedAddress = ethAddress.slice(1, -1);
+    }
+    
+    console.log(`Ethereum Address:`, formattedAddress);
+    return formattedAddress;
+  } catch (error) {
+    console.error('Error getting Ethereum address:', error);
+    throw error;
+  }
+}
+
+// Usage examples
+async function demo() {
+  try {
+    // Get the primary Ethereum address (default account)
+    const primaryAddress = await getEthereumAddress();
+    console.log('Primary Ethereum Address:', primaryAddress);
+    
+    // Get an address from a different account
+    const accountOneAddress = await getEthereumAddress(1);
+    console.log('Account 1 Ethereum Address:', accountOneAddress);
+    
+    // Get a different address index from the default account
+    const alternateAddress = await getEthereumAddress(0, 1, false);
+    console.log('Alternate Ethereum Address (Address Index 1):', alternateAddress);
+  } catch (error) {
+    console.error('Ethereum address demo failed:', error);
+  }
+}
+```
+
+## Using with ERC-20 Tokens
+
+The Ethereum address you retrieve is used for all ERC-20 tokens. Here's how to check your token balances:
+
+```typescript
+async function checkErc20TokenBalance(ethereumAddress, tokenContractAddress) {
+  // Use a web3 library or provider to call the token contract
+  const tokenContract = new web3.eth.Contract(erc20Abi, tokenContractAddress);
+  const balance = await tokenContract.methods.balanceOf(ethereumAddress).call();
+  
+  return balance;
+}
+```
+
+## Interactive Demo
+
+import { Callout } from 'nextra/components'
+
+<Callout type="info">
+  Connect your KeepKey device and ensure KeepKey Desktop is running to use this demo.
+</Callout>
+
+<div className="demo-container">
+  <div className="connection-status">
+    <div className="status-indicator">
+      <span className="indicator disconnected"></span>
+      <span className="status-text">Disconnected</span>
+    </div>
+    <button className="connect-button">Connect KeepKey</button>
+  </div>
+  
+  <div className="form-container">
+    <div className="form-group">
+      <label htmlFor="account-index">Account Index:</label>
+      <input type="number" id="account-index" defaultValue={0} min={0} max={100} />
+    </div>
+    
+    <div className="form-group">
+      <label htmlFor="address-index">Address Index:</label>
+      <input type="number" id="address-index" defaultValue={0} min={0} max={100} />
+    </div>
+    
+    <div className="form-group">
+      <label htmlFor="show-on-device">
+        <input type="checkbox" id="show-on-device" defaultChecked />
+        Show on Device
+      </label>
+    </div>
+    
+    <button id="get-address-button" disabled>Get Ethereum Address</button>
+  </div>
+  
+  <div className="result-container">
+    <div className="address-display">
+      <span id="address-result">Connect your KeepKey to get started</span>
+      <button id="copy-address" disabled>Copy</button>
+    </div>
+    <div id="qr-code" className="qr-code-container"></div>
+  </div>
+</div>
+
+## Troubleshooting
+
+### Common Errors
+
+| Error | Description | Solution |
+|-------|-------------|----------|
+| KeepKey Desktop not running | Cannot connect to KeepKey Desktop | Make sure KeepKey Desktop is installed and running |
+| Device disconnected | The KeepKey device was disconnected during operation | Reconnect your KeepKey and try again |
+| User rejected | Request was cancelled on the device | Try again and confirm the action on your KeepKey |
+| Timeout | Device didn't respond in time | Check connection and try again |
+
+### Tips
+
+- Always verify the address on your KeepKey device by setting `showDisplay: true`
+- The same Ethereum address is used for all ERC-20 tokens
+- Ethereum uses a different derivation path (m/44'/60'/0'/0/0) than other cryptocurrencies
+- Double-check the address format before using in any transaction 

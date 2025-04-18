@@ -6,8 +6,10 @@
   },
   "setup": "Setup",
   "support": "Support",
+  "assets": "Assets",
   "learn": "Learn",
   "developers": "Developers",
+  "ShapeShift": "ShapeShift",
   "contact": {
     "title": "Contact ↗",
     "type": "page",

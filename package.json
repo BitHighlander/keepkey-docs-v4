@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/shuding/nextra-docs-template#readme",
   "dependencies": {
+    "@keepkey/keepkey-sdk": "^0.2.62",
+    "@pioneer-platform/pioneer-client": "^9.2.6",
     "next": "^13.0.6",
     "nextra": "latest",
     "nextra-theme-docs": "latest",

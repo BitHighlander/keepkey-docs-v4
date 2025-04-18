@@ -1,0 +1,132 @@
+# Ethereum
+
+## Overview
+Ethereum is a decentralized, open-source blockchain platform that enables the creation of smart contracts and decentralized applications (dApps). KeepKey provides secure storage and transaction capabilities for Ethereum and ERC-20 tokens, allowing users to interact with the Ethereum ecosystem while maintaining control of their private keys.
+
+## Specifications
+
+| Property | Value |
+|----------|-------|
+| Symbol | ETH |
+| Decimal Places | 18 |
+| Network Type | Account-based |
+| Default Derivation Path | m/44'/60'/0'/0/0 |
+| Address Format | Hex address (0x...) |
+| ERC-20 Support | Yes |
+
+## Derivation Paths
+
+Ethereum uses the following derivation path structure:
+
+| Purpose | Path Format | Example |
+|---------|-------------|---------|
+| Standard (BIP44) | m/44'/60'/0'/0/0 | [0x8000002c, 0x8000003c, 0x80000000, 0, 0] |
+
+For advanced users, you can use different account indexes to create separate sets of addresses:
+
+```
+m/44'/60'/account_index'/0/address_index
+```
+
+- `account_index`: Typically 0' for the primary account, but can be changed to create separate accounts
+- `address_index`: Typically 0 for the first address, but can be incremented to create multiple addresses
+
+## Supported Operations
+
+- [Get Address](./get-address): Derive and display Ethereum addresses on your KeepKey device
+- [Validate Address](./validate-address): Verify if an Ethereum address is valid
+- [Send to Address](./send-to-address): Create and sign transactions to send Ethereum or ERC-20 tokens
+- [Transaction History](./tx-history): View the history of your Ethereum transactions
+- [ERC-20 Tokens](./erc20-tokens): Working with ERC-20 tokens on Ethereum
+
+## ERC-20 Tokens
+
+KeepKey supports ERC-20 tokens on the Ethereum network. These tokens share the same address as your Ethereum account but require specific contract information for transactions.
+
+### Popular ERC-20 Tokens
+
+| Token | Symbol | Decimals | Contract Address |
+|-------|--------|----------|-----------------|
+| USD Coin | USDC | 6 | 0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48 |
+| Tether | USDT | 6 | 0xdac17f958d2ee523a2206206994597c13d831ec7 |
+| Chainlink | LINK | 18 | 0x514910771af9ca656af840dff83e8264ecf986ca |
+| Dai | DAI | 18 | 0x6b175474e89094c44da98b954eedeac495271d0f |
+
+## Quick Start Example
+
+Here's a basic example of how to connect to your KeepKey and retrieve an Ethereum address:
+
+```typescript
+import { KeepKeySdk } from '@keepkey/keepkey-sdk';
+
+const initializeKeepKey = async () => {
+  try {
+    // Initialize SDK
+    const sdk = await KeepKeySdk.create({
+      apiKey: "my-ethereum-app",
+      pairingInfo: {
+        name: "Ethereum Wallet Demo",
+        imageUrl: "https://example.com/ethereum-logo.png",
+        url: window.location.origin,
+      }
+    });
+    
+    // Ethereum: m/44'/60'/0'/0/0
+    const ethereumParams = {
+      addressNList: [0x8000002c, 0x8000003c, 0x80000000, 0, 0],
+      showDisplay: true
+    };
+    
+    // Get Ethereum address
+    const ethAddress = await sdk.ethGetAddress({
+      ethereumGetAddress: ethereumParams
+    });
+    
+    console.log("Your Ethereum address:", ethAddress);
+    
+    return { sdk, address: ethAddress };
+  } catch (error) {
+    console.error("Error connecting to KeepKey:", error);
+    throw error;
+  }
+};
+
+// Run the example
+initializeKeepKey();
+```
+
+## ERC-20 Token Example
+
+To work with ERC-20 tokens, you'll use the same Ethereum address but need to include specific token information when sending transactions:
+
+```typescript
+// ERC-20 Token Transaction (simplified example)
+const sendErc20Token = async (sdk, tokenContractAddress, toAddress, amount) => {
+  // Create token transfer data
+  const data = createErc20TransferData(toAddress, amount);
+  
+  const txParams = {
+    addressNList: [0x8000002c, 0x8000003c, 0x80000000, 0, 0],
+    to: tokenContractAddress,  // The token contract address
+    value: '0',  // 0 ETH value for token transfers
+    data: data,  // The encoded transfer function call
+    chainId: 1,  // Ethereum mainnet
+    // ... other transaction parameters
+  };
+  
+  const signedTx = await sdk.ethSignTx({
+    ethereumSignTx: txParams
+  });
+  
+  // Broadcast the transaction
+  // ...
+};
+
+// Helper function to create ERC-20 transfer data
+function createErc20TransferData(toAddress, amount) {
+  // Implement token transfer data encoding
+  // ...
+}
+```
+
+Visit the specific operation pages for more detailed examples and interactive demos. 

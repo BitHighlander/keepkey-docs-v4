@@ -1,0 +1,78 @@
+# Litecoin
+
+## Overview
+Litecoin is a peer-to-peer cryptocurrency created as a fork of Bitcoin, designed to provide faster transaction confirmations and improved storage efficiency. KeepKey provides secure storage and transaction capabilities for Litecoin, allowing users to manage their LTC with hardware-level security.
+
+## Specifications
+
+| Property | Value |
+|----------|-------|
+| Symbol | LTC |
+| Decimal Places | 8 |
+| Network Type | UTXO |
+| Default Derivation Path | m/84'/2'/0'/0/0 (Native SegWit) |
+| Address Format Support | Legacy (P2PKH), SegWit (P2SH-P2WPKH), Native SegWit (P2WPKH) |
+
+## Derivation Paths
+
+KeepKey supports multiple address formats for Litecoin, each with a different derivation path:
+
+| Format | Purpose | Path Format | Example |
+|--------|---------|-------------|---------|
+| Legacy (P2PKH) | BIP44 | m/44'/2'/0'/0/0 | [0x8000002c, 0x80000002, 0x80000000, 0, 0] |
+| SegWit (P2SH-P2WPKH) | BIP49 | m/49'/2'/0'/0/0 | [0x80000031, 0x80000002, 0x80000000, 0, 0] |
+| Native SegWit (P2WPKH) | BIP84 | m/84'/2'/0'/0/0 | [0x80000054, 0x80000002, 0x80000000, 0, 0] |
+
+## Supported Operations
+
+- [Get Address](./get-address): Derive and display Litecoin addresses on your KeepKey device
+- [Validate Address](./validate-address): Verify if a Litecoin address is valid
+- [Send to Address](./send-to-address): Create and sign transactions to send Litecoin
+- [Transaction History](./tx-history): View the history of your Litecoin transactions
+
+## Quick Start Example
+
+Here's a basic example of how to connect to your KeepKey and retrieve a Litecoin address:
+
+```typescript
+import { KeepKeySdk } from '@keepkey/keepkey-sdk';
+
+const initializeKeepKey = async () => {
+  try {
+    // Initialize SDK
+    const sdk = await KeepKeySdk.create({
+      apiKey: "my-litecoin-app",
+      pairingInfo: {
+        name: "Litecoin Wallet Demo",
+        imageUrl: "https://example.com/litecoin-logo.png",
+        url: window.location.origin,
+      }
+    });
+    
+    // Litecoin Native SegWit (BIP84): m/84'/2'/0'/0/0
+    const litecoinParams = {
+      addressNList: [0x80000054, 0x80000002, 0x80000000, 0, 0],
+      coin: 'Litecoin',
+      scriptType: 'p2wpkh', // Native SegWit
+      showDisplay: true
+    };
+    
+    // Get Litecoin address
+    const ltcAddress = await sdk.ltcGetAddress({ 
+      litecoinGetAddress: litecoinParams 
+    });
+    
+    console.log("Your Litecoin address:", ltcAddress);
+    
+    return { sdk, address: ltcAddress };
+  } catch (error) {
+    console.error("Error connecting to KeepKey:", error);
+    throw error;
+  }
+};
+
+// Run the example
+initializeKeepKey();
+```
+
+Visit the specific operation pages for more detailed examples and interactive demos. 
