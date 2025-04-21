@@ -1,8 +1,18 @@
 import React from 'react'
 import { DocsThemeConfig } from 'nextra-theme-docs'
 
+// Define homepage URL from env
+const homepage = process.env.NEXT_PUBLIC_APP_HOME_URL || '/'
+
 const config: DocsThemeConfig = {
-  logo: <span>KeepKey Docs</span>,
+  logo: (
+    <img
+      src="/keepkey-logo.svg"
+      alt="KeepKey Logo"
+      style={{ height: '1.5em', marginRight: '0.5em' }}
+    />
+  ),
+  logoLink: homepage,
   project: {
     link: 'https://github.com/keepkey',
   },
