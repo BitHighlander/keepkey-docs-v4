@@ -1,0 +1,2 @@
+.nextra-toc :nth-child(n+7) { display:none; }
+.nextra-toc:hover :nth-child(n+7) { display:list-item; }
