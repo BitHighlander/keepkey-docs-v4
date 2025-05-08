@@ -2,18 +2,42 @@
 
 import * as React from 'react'
 
-export const KeepKeyUILogo: React.FC<React.SVGProps<SVGSVGElement>> = (props) => {
+export interface KeepKeyUILogoProps extends React.SVGProps<SVGSVGElement> {
+  // We expect width and height to be numbers for pixel values
+  width?: number;
+  height?: number;
+}
+
+export const KeepKeyUILogo: React.FC<KeepKeyUILogoProps> = (props) => {
+  // Destructure props to separate style and our specific width/height from other SVG attributes
+  const { width: propWidth, height: propHeight, style: incomingStyle, ...restSvgProps } = props;
+
+  // Define default dimensions if not provided
+  const svgWidth = propWidth || 200; // Default to 200px
+  const svgHeight = propHeight || 50;  // Default to 50px
+
+  // Construct the style object.
+  // Start with incomingStyle, then explicitly set width and height with !important.
+  const finalStyle: React.CSSProperties = {
+    ...incomingStyle, // Apply other incoming styles
+    width: `${svgWidth}px !important`,
+    height: `${svgHeight}px !important`,
+    display: 'block', // Ensure display:block is maintained or added
+  };
+
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 512 512"
-      width="100%"
-      height="auto"
       preserveAspectRatio="xMidYMid meet"
-      {...props}
+      {...restSvgProps} // Spread the rest of the SVG props (like className, etc.)
+      width={svgWidth} // Set direct attributes as well
+      height={svgHeight}
+      style={finalStyle} // Apply the carefully constructed style object
+      data-component-name="KeepKeyUILogo"
     >
       <defs>
-        <style>{`.cls-1 { fill: currentColor; }`}</style>
+        <style>{`.cls-1 { fill: #ffffff; }`}</style>
       </defs>
       <path
         d="M486.05,0c13.29,3.65,22.3,12.65,25.95,25.95v459.1c-3.95,14.06-14.35,24.69-29.41,25.99H30.4c-15.7-1.35-28.1-13.75-29.44-29.44V29.41C2.25,14.35,12.88,3.95,26.95,0h459.1ZM68.87,89.82h-15.97v288.44h15.97v-50.9l48.41,50.9h22.46l-49.83-52.53,44.84-44.28h-22.46l-43.42,41.92v-118.77l47.41,49.9h23.45l-49.83-51.54,44.84-44.28h-22.46l-43.42,41.92v-110.78Z"
