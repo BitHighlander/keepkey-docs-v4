@@ -6,6 +6,18 @@ import { KeepKeyUILogo } from './components/logo/keepkey-ui'
 const homepage = process.env.NEXT_PUBLIC_APP_HOME_URL || '/'
 
 const config: DocsThemeConfig = {
+  i18n: [
+    { locale: 'en', text: 'English' },
+    { locale: 'es', text: 'Español' },
+    { locale: 'de', text: 'Deutsch' },
+    { locale: 'fr', text: 'Français' },
+    { locale: 'it', text: 'Italiano' },
+    { locale: 'ja', text: '日本語' },
+    { locale: 'ko', text: '한국어' },
+    { locale: 'pl', text: 'Polski' },
+    { locale: 'pt', text: 'Português' },
+    { locale: 'zh', text: '中文' },
+  ],
   logo: (
     <span style={{ display: 'flex', alignItems: 'center', gap: '0.5em' }}>
       <KeepKeyUILogo style={{ height: '1.5em' }} />

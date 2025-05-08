@@ -3,4 +3,10 @@ const withNextra = require('nextra')({
   themeConfig: './theme.config.tsx',
 })
 
-module.exports = withNextra()
+module.exports = {
+  i18n: {
+    locales: ['en', 'es', 'de', 'fr', 'it', 'ja', 'ko', 'pl', 'pt', 'zh'],
+    defaultLocale: 'en',
+  },
+  ...withNextra()
+}
