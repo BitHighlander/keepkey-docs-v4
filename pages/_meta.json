@@ -1,11 +1,2 @@
 {
-  "index": "Introduction",
-  "setup": "Setup",
-  "about": {
-    "title": "About",
-    "type": "page"
-  },
-  "learn": "Learn",
-  "developers": "Developers",
-  "shapeshift": "ShapeShift"
 }

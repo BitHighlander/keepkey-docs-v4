@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/shuding/nextra-docs-template#readme",
   "dependencies": {
+    "@coinmasters/pioneer-sdk": "^4.10.1",
     "@keepkey/keepkey-sdk": "^0.2.62",
     "@pioneer-platform/pioneer-client": "^9.2.6",
     "next": "^13.0.6",
