@@ -38,7 +38,7 @@ const config: DocsThemeConfig = {
     )
   },
   sidebar: {
-    defaultMenuCollapseLevel: 0, // Ensures all sections are collapsed by default
+    defaultMenuCollapseLevel: 1, // Ensures all sections are collapsed by default
   },
   docsRepositoryBase: 'https://github.com/keepkey/keepkey-docs-repo',
   footer: {
